@@ -45,6 +45,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a new person | 
 `* * *` | user | delete a person | can remove entries that I no longer need
 `* * *` | user | find a person by name | locate details of persons without having to go through the entire list
+`* *` | user | edit a person's details | update my contacts' details
 `* *` | user | hide [private contact details](#private-contact-detail) by default | to minimize chance of someone else seeing them by accident
 `*` | user with many persons in the address book | sort persons by name | locate a person easily
 
@@ -73,13 +74,32 @@ Use case ends.
 
 > 3a1. AddressBook shows an error message <br>
   Use case resumes at step 2
+  
+#### Use case: Change tag friends to buddies
+
+**MSS**
+
+1. User requests to find a specific person.
+2. User requests to change person's tag from friends to buddies.
+3. AddressBook confirms change with user before proceeding.
+4. User confirms change.
+5. AddressBook changes person's tag from friends to buddies.<br>
+Use case ends.
+
+**Extensions**
+
+1a. The given name is invalid.
+
+> 1a1. AddressBook shows an error message <br>
+  Use case resumes at step 1.
 
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java 8 or higher installed.
 2. Should be able to hold up to 1000 persons.
 3. Should come with automated unit tests and open source code.
-4. Should favor DOS style commands over Unix-style commands
+4. Should favor DOS style commands over Unix-style commands.
+5. Should not be a resource hog.
 
 ## Appendix D : Glossary
 
