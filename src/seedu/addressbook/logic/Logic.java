@@ -19,7 +19,7 @@ import java.util.Optional;
 public class Logic {
 
 
-    private Storage storage;
+    private Storage[] storages;
     private AddressBook addressBook;
 
     /** The list of person shown to the user most recently.  */
@@ -27,12 +27,12 @@ public class Logic {
 
     public Logic() throws Exception{
         setStorage(initializeStorage());
-        setAddressBook(storage.load());
+        setAddressBook(storages[0].load());
     }
 
-    Logic(Storage storage) throws StorageOperationException {
-        setStorage(storage);
-        setAddressBook(storage.load());
+    Logic(Storage... storages) throws StorageOperationException {
+        setStorage(storages);
+        setAddressBook(storages[0].load());
     }
     
     Logic(Storage storageFile, AddressBook addressBook){
@@ -40,8 +40,8 @@ public class Logic {
         setAddressBook(addressBook);
     }
 
-    void setStorage(Storage storage){
-        this.storage = storage;
+    void setStorage(Storage... storages){
+        this.storages = storages;
     }
 
     void setAddressBook(AddressBook addressBook){
@@ -57,7 +57,7 @@ public class Logic {
     }
 
     public String getStorageFilePath() {
-        return storage.getPath();
+        return storages[0].getPath();
     }
 
     /**
@@ -92,7 +92,9 @@ public class Logic {
     private CommandResult execute(Command command) throws Exception {
         command.setData(addressBook, lastShownList);
         CommandResult result = command.execute();
-        storage.save(addressBook);
+        for (Storage storage : storages) {
+            storage.save(addressBook);
+        }
         return result;
     }
 
