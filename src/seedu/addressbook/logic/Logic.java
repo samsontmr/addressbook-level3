@@ -30,8 +30,8 @@ public class Logic {
         setAddressBook(storage.load());
     }
 
-    Logic(Storage storageFile) throws StorageOperationException {
-        setStorage(storageFile);
+    Logic(Storage storage) throws StorageOperationException {
+        setStorage(storage);
         setAddressBook(storage.load());
     }
     
